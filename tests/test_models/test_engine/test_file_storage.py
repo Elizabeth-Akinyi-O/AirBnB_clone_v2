@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """ Module for testing file storage"""
+import os
 import unittest
 from models.base_model import BaseModel
 from models import storage
-import os
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file')
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
@@ -41,6 +42,12 @@ class test_fileStorage(unittest.TestCase):
         temp = storage.all()
         self.assertIsInstance(temp, dict)
 
+    def test_all_cls(self):
+        """ Check instance of objs with args """
+        new = BaseModel()
+        temp = storage.all(new)
+        self.assertIsInstance(temp, dict)
+
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
         new = BaseModel()
@@ -63,6 +70,7 @@ class test_fileStorage(unittest.TestCase):
     def test_reload(self):
         """ Storage file is successfully loaded to __objects """
         new = BaseModel()
+        new.save()
         storage.save()
         storage.reload()
         for obj in storage.all().values():
@@ -107,3 +115,10 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_delete(self):
+        """ Create object and then delete """
+        new = Basemodel()
+        new.save()
+        storage.delete(new)
+        self.assertEqual(storage.all(), {})
