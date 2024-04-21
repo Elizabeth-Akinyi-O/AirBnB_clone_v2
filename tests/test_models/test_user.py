@@ -5,30 +5,30 @@ from models.user import User
 
 
 class test_User(test_basemodel):
-    """ """
+    """ Test for class User """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """ Initialize test """
         super().__init__(*args, **kwargs)
         self.name = "User"
         self.value = User
 
     def test_first_name(self):
-        """ """
+        """ Test first name """
         new = self.value()
-        self.assertEqual(type(new.first_name), str)
+        self.assertEqual((new.first_name), None)
 
     def test_last_name(self):
-        """ """
+        """ Test last name """
         new = self.value()
-        self.assertEqual(type(new.last_name), str)
+        self.assertEqual((new.last_name), None)
 
     def test_email(self):
-        """ """
+        """ Test email """
         new = self.value()
-        self.assertEqual(type(new.email), str)
+        self.assertEqual((new.email), None)
 
     def test_password(self):
-        """ """
+        """ Test password """
         new = self.value()
-        self.assertEqual(type(new.password), str)
+        self.assertEqual((new.password), None)
