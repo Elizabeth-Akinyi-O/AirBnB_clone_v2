@@ -66,7 +66,7 @@ class test_basemodel(unittest.TestCase):
         if "_sa_instance_state" in dictionary:
             del dictionary["_sa_instance_state"]
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         i.__dict__))
+                         dictionary))
 
     def test_todict(self):
         """ """
@@ -117,7 +117,7 @@ class test_basemodel(unittest.TestCase):
         kwargs = {'name': "California"}
         new = self.value(**kwargs)
         new.save()
-        self.assertTrue("name" in new.__dict)
+        self.assertTrue("name" in new.__dict__)
 
     def test_no_weirdkeys(self):
         """ Tests no weird keys are created """
