@@ -32,6 +32,7 @@ class test_fileStorage(unittest.TestCase):
     def test_new(self):
         """ New object is correctly added to __objects """
         new = BaseModel()
+        new.save()
         for obj in storage.all().values():
             temp = obj
         self.assertTrue(temp is obj)
@@ -105,6 +106,7 @@ class test_fileStorage(unittest.TestCase):
     def test_key_format(self):
         """ Key is properly formatted """
         new = BaseModel()
+        new.save()
         _id = new.to_dict()['id']
         for key in storage.all().keys():
             temp = key
@@ -118,7 +120,7 @@ class test_fileStorage(unittest.TestCase):
 
     def test_delete(self):
         """ Create object and then delete """
-        new = Basemodel()
+        new = BaseModel()
         new.save()
         storage.delete(new)
         self.assertEqual(storage.all(), {})
