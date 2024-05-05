@@ -230,10 +230,9 @@ class TestConsoleClass(unittest.TestCase):
             HBNBCommand().onecmd('create BaseModel')
             basemodel_id = id_output.getvalue()
             self.assertTrue(len(basemodel_id) > 0)
-        with patch('sys.stdout', new=StringIO()) as output:
+        with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd('update BaseModel ' + basemodel_id)
-            self.assertTrue(output.getvalue() == "** attribute name
-                            missing **\n")
+            self.assertTrue(val.getvalue() == "** attribute name missing **\n")
 
     def test_alternative_create(self):
         """ Checks if the attribute name is missing """
