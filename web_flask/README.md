@@ -1,5 +1,4 @@
-C:\Users\lizzi\OneDrive\Desktop\flask.png
-
+![flask](https://github.com/Elizabeth-Akinyi-O/AirBnB_clone_v2/assets/145594149/ba1ef725-625a-4a8f-875e-571d704261cd)
 
 Learning Objectives:
 
