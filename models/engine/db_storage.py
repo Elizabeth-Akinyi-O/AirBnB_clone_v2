@@ -13,8 +13,7 @@ class DBStorage():
     __session = None
 
     def __init__(self):
-        """ inits the sql db storage """
-        from models.base_model import Base
+        """ Inits the sql db storage """
 
         dbUser = os.environ.get('HBNB_MYSQL_USER')
         dbPassword = os.environ.get('HBNB_MYSQL_PWD')
@@ -40,19 +39,20 @@ class DBStorage():
         from models.review import Review
         from console import HBNBCommand
 
-        objects_dict = {}
+        result = {}
+        all_classes = [User, State, City, Amenity, Place, Review]
+
         if cls is None:
-            for key in HBNBCommand.classes:
-                if key != "BaseModel":
-                    val = HBNBCommand.classes[key]
-                    for row in self.__session.query(val).all():
-                        object_dict.update({'{}.{}'.format(key, row.id): row})
-            return (object_dict)
-        else:
-            if cls is not BaseModel:
+            for cls in all_classes:
                 for row in self.__session.query(cls).all():
-                    object_dict.update({'{}.{}'.format(cls, row.id): row})
-            return (object_dict)
+                    key = "{}.{}".format(cls.__name__, row.id)
+                    result[key] = row
+        else:
+            for row in self.__session.query(cls).all():
+                key = "{}.{}".format(cls.__name__, row.id)
+                result[key] = row
+
+        return (result)
 
     def new(self, obj):
         """ Creates a new object """
